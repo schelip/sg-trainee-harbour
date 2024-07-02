@@ -11,6 +11,6 @@ nTemp := nA
 nA := nB
 nB := nTemp
 
-@ 04,01 say "Antes da troca:"
+@ 04,01 say "Depois da troca:"
 @ 05,01 say "A:" + Str(nA)
 @ 06,01 say "B:" + Str(nB)
