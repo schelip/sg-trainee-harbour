@@ -1,13 +1,16 @@
 clear
 
-cNome := space(10)
+cNome     := Space( 25 )
+nContador := 0
+nColuna   := 0
 
 @ 01,01 say "Nome:"
 
 @ 01,07 get cNome
 read
 
-for nCounter := 0 to 9
-    nCol := 3 + nCounter
-    @ nCol, 01 say str(nCounter + 1) + ". " + cNome
-next
+while (nContador < 10)
+    nColuna := 3 + nContador
+    @ nColuna,01 say cNome
+    nContador++
+enddo

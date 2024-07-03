@@ -13,9 +13,9 @@ cString  := Space(30)
 @ 05,01 say "Informe uma string:"
 
 @ 01,21 get cLetra
-@ 02,21 get dData pict "@E"
-@ 03,21 get nInteiro
-@ 04,21 get nDecimal pict "@E 99999.99999"
+@ 02,21 get dData    picture "@E"
+@ 03,21 get nInteiro picture "9999999"    range 0, 100 
+@ 04,21 get nDecimal picture "@E 999.999" valid !Empty( nDecimal )
 @ 05,21 get cString
 read
 
