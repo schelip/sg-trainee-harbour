@@ -1,7 +1,15 @@
 # Padrões de estilo de código SG Trainee
 
 ## Geral
-- Sempre iniciar com `clear`
+- Bloco inicial:
+```
+set date to british
+set epoch to 1940
+set scoreboard off
+
+clear
+```
+
 - Palavras reservadas em minúsculo (`say`, `get`, `if`)
 - Utilizar nome com maiúsculas em chamada de função
 - Espaço entre parênteses e argumentos
@@ -21,11 +29,12 @@ Str( nDecimal )
 - camelCase com até 3 palavras
 - Nomes de variáveis em português
 ```harbour
-cLetra   := Space(1)
-dData    := Date()
-nInteiro := 0
-nDecimal := 0
-cString  := Space(30)
+cLetra     := Space(1)
+dDataAtual := Date()
+dDataVazia := CToD("")
+nInteiro   := 0
+nDecimal   := 0
+cString    := Space(30)
 ```
 
 # Entrada/Saída
@@ -72,8 +81,8 @@ Logica do programa...
 - Realizar operações na chamada de `say`/`get` ou utilizar variável adicional?
 ```clear
 
-cPalavra := space(30)
-nLen     := 0
+cPalavra  := space(30)
+nLen      := 0
 nContador := 0
 
 @ 01,01 say "Palavra:"
