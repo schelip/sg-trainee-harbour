@@ -13,18 +13,36 @@ nC := 0
 @ 03,11 get nC
 read
 
-if (nA > nB)
-    if (nA > nC)
-        nMaior := nA
-    else
-        nMaior := nC
-    endif
-else
-    if (nB > nC)
-        nMaior := nB
-    else
-        nMaior := nC
-    endif
+// nA 2 nB 2 nC 2
+// if (nA > nB)
+//     if (nA > nC)
+//         nMaior := nA
+//     else
+//         nMaior := nC
+//     endif
+// else
+//     if (nB > nC)
+//         nMaior := nB
+//     else
+//         nMaior := nC
+//     endif
+// endif
+
+// nA 2 nB 3 nC 3
+// if (nA > nB .and. nA > nC)
+//     nMaior := nA
+// elseif (nB > nA .and. nB > nC)
+//     nMaior := nB
+// else
+//     nMaior := nC
+// endif
+
+nMaior := nA
+if (nB > nMaior)
+    nMaior := nB
+endif
+if (nC > nMaior)
+    nMaior := nC
 endif
 
 @ 05,01 say "Maior valor: " + LTrim(Str(nMaior))

@@ -10,13 +10,18 @@ nIdade := 0
 @ 02,08 get nIdade
 read
 
-if (nIdade <= 7)
+if (nidade < 5)
+    @ 03,01 say Trim(cNome) + " nao esta em nenhuma categoria"
+    quit
+endif
+
+if nIdade <= 7
     cCategoria := 'Infantil A'
-elseif (nIdade <= 10)
+elseif nIdade <= 10
     cCategoria := 'Infantil B'
-elseif (nIdade <= 13)
+elseif nIdade <= 13
     cCategoria := 'Juvenil A'
-elseif (nIdade <= 17)
+elseif nIdade <= 17
     cCategoria := 'Juvenil B'
 else
     cCategoria := 'Senior'

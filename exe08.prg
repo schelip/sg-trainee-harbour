@@ -19,12 +19,14 @@ cDescProduto3     := Space( 31 )
 nValorProduto3    := 0
 nQuantProduto3    := 0
 
+cDataExtenso      := ""
 nTotal            := 0
 
-@ 00,00 to 24,79 double
+@ 00,00 to 24,79 double // Box principal
 
-@ 01,33 say "SG CONVENIENCIA"
+@ 01,33 say "SG CONVENIENCIA" // Titulo
 
+/* Cadastro de cliente ------------------------------------------------------ */
 @ 02,01 to 07,50 double
 @ 05,22 to 06,22
 @ 05,43 to 06,43
@@ -40,6 +42,8 @@ nTotal            := 0
 @ 06,23 get cEnderecoCliente                  valid !Empty( cEnderecoCliente )
 @ 06,44 get nIdadeCliente    picture "   999" range 1,130
 
+
+/* Detalhes da compra ------------------------------------------------------- */
 @ 08,01 to 23,50 double
 @ 10,02 to 10,49
 @ 12,02 to 12,32
@@ -67,44 +71,118 @@ nTotal            := 0
 @ 15,37 get nValorProduto3 picture "@E 999.99" valid nValorProduto3 > 0
 @ 15,44 get nQuantProduto3 picture "   999"    valid nQuantProduto3 > 0
 
-//read
-nTotal := nValorProduto1 * nQuantProduto1 + nValorProduto2 * nQuantProduto2 + nValorProduto3 * nQuantProduto3
+
+/* Nota Fiscal -------------------------------------------------------------- */
+read
+nTotal := nValorProduto1 * nQuantProduto1
+nTotal += nValorProduto2 * nQuantProduto2
+nTotal += nValorProduto3 * nQuantProduto3
 
 @ 02,51 to 23,78 double
 @ 04,52 to 04,77
-@ 09,52 to 09,77
+@ 08,52 to 08,77
+@ 10,52 to 10,77
+@ 16,52 to 16,77
+@ 21,52 to 21,77
 
 @ 03,53 say "NOTA FISCAL"
 
-@ 06,52 say SubStr( AllTrim( cDescProduto1 ), 0, 10 )
-@ 06,63 say Transform( nValorProduto1, "@E R$ 999.99" )
-@ 06,73 say Transform( nValorProduto1, "@E x999" )
-@ 07,52 say SubStr( AllTrim( cDescProduto2 ), 0, 10 )
-@ 07,63 say Transform( nValorProduto2, "@E R$ 999.99" )
-@ 07,73 say Transform( nValorProduto2, "@E x999" )
-@ 08,52 say SubStr( AllTrim( cDescProduto3 ), 0, 10 )
-@ 08,63 say Transform( nValorProduto3, "@E R$ 999.99" )
-@ 08,73 say Transform( nValorProduto3, "@E x999" )
+@ 05,52 say SubStr( AllTrim( cDescProduto1 ), 0, 10 )
+@ 05,63 say Transform( nValorProduto1, "@E R$ 999.99" )
+@ 05,73 say Transform( nQuantProduto1, "@E x999" )
+@ 06,52 say SubStr( AllTrim( cDescProduto2 ), 0, 10 )
+@ 06,63 say Transform( nValorProduto2, "@E R$ 999.99" )
+@ 06,73 say Transform( nQuantProduto2, "@E x999" )
+@ 07,52 say SubStr( AllTrim( cDescProduto3 ), 0, 10 )
+@ 07,63 say Transform( nValorProduto3, "@E R$ 999.99" )
+@ 07,73 say Transform( nQuantProduto3, "@E x999" )
 
-@ 10,56 say "TOTAL:"
-@ 10,63 say Transform( nTotal, "@E R$ 999.99" )
+@ 09,56 say "TOTAL:"
+@ 09,63 say Transform( nTotal, "@E R$ 999.99" )
 
-@ 19,52 say Date()
-@ 20,52 say cNomeCliente + ", " + Str(nIdadeCliente)
-@ 21,52 say cEnderecoCliente
+@ 11,59 to 11,64 double
+@ 12,59 to 13,59 double
+@ 13,59 to 13,64 double
+@ 14,64 to 15,64 double
+@ 15,59 to 15,64 double
 
+@ 11,66 to 11,71 double
+@ 12,66 to 15,66 double
+@ 15,66 to 15,71 double
+@ 13,71 to 14,71 double
+@ 13,71 to 13,69 double
 
-read
+cDataExtenso := "Maringa, "
+cDataExtenso += " " + AllTrim(Str(Day(dDataAtual)))
 
-// @ 01,01 say "Quantidade Produto A (R$10,00):" 
-//  @ 02,01 say "Quantidade Produto B (R$5,31):" 
-// @ 03,01 say "Quantidade Produto C (R$20,00):" 
+switch Month(dDataAtual)
+    case 1
+        cDataExtenso += "janeiro"
+        exit
+    case 2
+        cDataExtenso += "fevereiro"
+        exit
+    case 3
+        cDataExtenso += "marco"
+        exit
+    case 4
+        cDataExtenso += "abril"
+        exit
+    case 5
+        cDataExtenso += "maio"
+        exit
+    case 6
+        cDataExtenso += "junho"
+        exit
+    case 7
+        cDataExtenso += "julho"
+        exit
+    case 8
+        cDataExtenso += "agosto"
+        exit
+    case 9
+        cDataExtenso += "setembro"
+        exit
+    case 10
+        cDataExtenso += "outubro"
+        exit
+    case 11
+        cDataExtenso += "novembro"
+        exit
+    case 12
+        cDataExtenso += "dezembro"
+        exit
+endswitch
 
-// @ 01,43 get nQuantA picture "99" color "W/N" valid !Empty( nQuantA )
-// @ 02,43 get nQuantB picture "99"
-// @ 03,43 get nQuantC picture "99"
-// read
+cDataExtenso += " " + Transform(Year(dDataAtual), "9999")
 
-// nTotal = 10 * nQuantA + 5.31 * nQuantB + 20 * nQuantC
+switch DoW(dDataAtual)
+    case 1
+        cDiaExtenso := "Domingo"
+        exit
+    case 2
+        cDiaExtenso := "Segunda-feira"
+        exit
+    case 3
+        cDiaExtenso := "Terca-feira"
+        exit
+    case 4
+        cDiaExtenso := "Quarta-feira"
+        exit
+    case 5
+        cDiaExtenso := "Quinta-feira"
+        exit
+    case 6
+        cDiaExtenso := "Sexta-feira"
+        exit
+    case 7
+        cDiaExtenso := "Sabado"
+        exit
+endswitch
 
-// @ 05,01 say "Conta do cliente = " + Str(nTotal)
+@ 17,52 say cDataExtenso
+@ 18,52 say cDiaExtenso
+@ 19,52 say AllTrim(cNomeCliente) + ", " + AllTrim(Str(nIdadeCliente))
+@ 20,52 say cEnderecoCliente
+
+@ 22,52 say "Obrigado pela compra!"
